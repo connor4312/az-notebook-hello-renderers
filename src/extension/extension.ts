@@ -9,37 +9,47 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.notebook.registerNotebookContentProvider('test-notebook-renderer', new TestProvider()),
 
-    vscode.notebook.registerNotebookKernel('test-notebook-kernel', ['*.sample-notebook'], {
-      label: 'Test notebook kernel',
-      cancelCellExecution() {},
-      cancelAllCellsExecution() {},
-      async executeAllCells(doc) {
-        await Promise.all(doc.cells.map((cell) => this.executeCell(doc, cell)));
-      },
-      async executeCell(_doc, cell) {
-        if (cell?.language !== 'json') {
-          return;
-        }
+    vscode.notebook.registerNotebookKernelProvider(
+      { filenamePattern: '*.sample-notebook' },
+      {
+        provideKernels() {
+          return [
+            {
+              label: 'Test notebook kernel',
+              preloads: [vscode.Uri.parse('http://localhost:5002/main.js')],
+              cancelCellExecution() {},
+              cancelAllCellsExecution() {},
+              async executeAllCells(doc) {
+                await Promise.all(doc.cells.map((cell) => this.executeCell(doc, cell)));
+              },
+              async executeCell(_doc, cell) {
+                if (cell?.language !== 'json') {
+                  return;
+                }
 
-        try {
-          cell.outputs = [
-            {
-              outputKind: vscode.CellOutputKind.Rich,
-              data: { 'application/custom+image': JSON.parse(cell.document.getText()) },
+                try {
+                  cell.outputs = [
+                    {
+                      outputKind: vscode.CellOutputKind.Rich,
+                      data: { 'application/custom+image': JSON.parse(cell.document.getText()) },
+                    },
+                  ];
+                } catch (e) {
+                  cell.outputs = [
+                    {
+                      outputKind: vscode.CellOutputKind.Error,
+                      ename: e.constructor.name,
+                      evalue: e.message,
+                      traceback: e.stack,
+                    },
+                  ];
+                }
+              },
             },
           ];
-        } catch (e) {
-          cell.outputs = [
-            {
-              outputKind: vscode.CellOutputKind.Error,
-              ename: e.constructor.name,
-              evalue: e.message,
-              traceback: e.stack,
-            },
-          ];
-        }
+        },
       },
-    }),
+    ),
   );
 }
 

@@ -32,7 +32,7 @@ export class TestProvider implements vscode.NotebookContentProvider {
       cells: [
         {
           cellKind: vscode.CellKind.Code,
-          source: `{ "title": "Hello world!", "src": "https://source.unsplash.com/600x400/?cat" }`,
+          source: `{ "title": "Hello world!", "url": "https://source.unsplash.com/600x400/?cat" }`,
           language: 'json',
           outputs: [],
           metadata: {},

@@ -16,11 +16,8 @@
       "outFiles": [
         "${workspaceFolder}/out/**/*.js"
       ],
-      "debugWebviews": {
-        "urlFilter": "*notebookRenderer*"
-      },
       "trace": true,
-      // "preLaunchTask": "npm: dev"
+      "preLaunchTask": "npm: dev"
     },
     {
       "name": "Run Extension (no server)",
@@ -33,7 +30,6 @@
       "outFiles": [
         "${workspaceFolder}/out/**/*.js"
       ],
-      "debugWebviews": true,
       "preLaunchTask": "npm: watch"
     },
     {
