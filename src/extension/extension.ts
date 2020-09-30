@@ -16,14 +16,14 @@ export function activate(context: vscode.ExtensionContext) {
           return [
             {
               label: 'Test notebook kernel',
-              preloads: [vscode.Uri.parse('http://localhost:5002/main.js')],
+              preloads: [vscode.Uri.parse(invalid)],
               cancelCellExecution() {},
               cancelAllCellsExecution() {},
               async executeAllCells(doc) {
                 await Promise.all(doc.cells.map((cell) => this.executeCell(doc, cell)));
               },
               async executeCell(_doc, cell) {
-                if (cell?.language !== 'json') {
+                if (cell?.language !== 'json') 
                   return;
                 }
 
