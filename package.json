@@ -10,7 +10,7 @@
     "Other"
   ],
   "enableProposedApi": true,
-  "activationEvents": ["onNotebookEditor:test-notebook-renderer"],
+  "activationEvents": ["*"],
   "main": "./out/extension/extension.js",
   "contributes": {
     "notebookOutputRenderer": [
