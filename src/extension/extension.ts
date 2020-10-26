@@ -1,5 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+import { resolve } from 'path';
 import * as vscode from 'vscode';
 import { TestProvider } from './testProvider';
 
@@ -16,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
           return [
             {
               label: 'Test notebook kernel',
-              preloads: [vscode.Uri.parse('http://localhost:5002/main.js')],
+              preloads: [vscode.Uri.file(resolve(__dirname, '..', '..', 'test.js'))],
               cancelCellExecution() {},
               cancelAllCellsExecution() {},
               async executeAllCells(doc) {

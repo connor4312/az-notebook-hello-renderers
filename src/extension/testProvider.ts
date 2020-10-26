@@ -38,7 +38,7 @@ export class TestProvider implements vscode.NotebookContentProvider {
           metadata: {},
         },
       ],
-      languages: ['json'],
+      languages: ['*'],
       metadata: {},
     };
   }

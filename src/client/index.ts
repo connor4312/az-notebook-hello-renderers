@@ -10,6 +10,8 @@ notebookApi.onDidCreateOutput((evt) => {
     url: string;
   } = evt.output.data[evt.mimeType];
 
+  debugger;
+
   const title = document.createElement('h1');
   title.innerText = output.title;
   evt.element.appendChild(title);
