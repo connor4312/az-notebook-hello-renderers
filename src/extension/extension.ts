@@ -17,7 +17,9 @@ export function activate(context: vscode.ExtensionContext) {
           return [
             {
               label: 'Test notebook kernel',
-              preloads: [vscode.Uri.file(resolve(__dirname, '..', '..', 'test.js'))],
+              preloads: [
+                vscode.Uri.file(resolve(__dirname, '..', '..', 'test.js')),
+              ],
               cancelCellExecution() {},
               cancelAllCellsExecution() {},
               async executeAllCells(doc) {

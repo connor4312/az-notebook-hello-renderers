@@ -1,1 +1,2 @@
+console.log(requirejs);
 debugger;

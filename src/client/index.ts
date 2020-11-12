@@ -2,6 +2,8 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
 
+
+
 const notebookApi = acquireNotebookRendererApi("az-notebook-hello-renderers");
 
 notebookApi.onDidCreateOutput((evt) => {
